@@ -1,4 +1,8 @@
 ## Find the length of the file
+function ADD_AUTHOR {
+  echo $1
+}
+
 function CHECK_OWNERSHIP {
   input=($1)
   size=${input[0]}
@@ -10,13 +14,15 @@ function CHECK_OWNERSHIP {
 
   if [ $OWNER -eq 1 ]
     then
-      echo $AUTHOR
+      ADD_AUTHOR $AUTHOR
   fi
 }
 
 function PROCESS_FILE {
   FILE_PATH=$1
   SIZE=$(cat $(echo $FILE_PATH) | wc -l)
+  
+  git log --diff-filter=A -- docker-compose.yml | grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" | ADD_AUTHOR
 
   git blame --show-email HEAD~1 -- $1 | grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" | sort | uniq -c | sort -r | while read line; do CHECK_OWNERSHIP "$SIZE $line"; done
 }
