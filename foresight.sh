@@ -4,10 +4,8 @@ set -e
 function ADD_AUTHOR {
   local author_to_add=$1
 
-  local author_to_add="$(echo $author_to_add | grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b")"
-
   if ! [ -z "${author_to_add}" ]; then
-    # make a request to add the author to a review... using your platform
+    #add something to add people to review in your source repo
   fi
 
 }
@@ -30,19 +28,28 @@ function CHECK_OWNERSHIP {
   fi
 }
 
+function GET_EMAIL {
+  while read data; do
+    echo "$data" | grep -E -o "<\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b>"\
+      | grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b";
+  done;
+}
+
 function PROCESS_FILE {
   local FILE_PATH=$1
   local FILE_SIZE="$(cat $(echo $FILE_PATH) | wc -l)"
 
   # Find the people with current ownership
-  git blame --show-email HEAD~1 -- $1 &> /dev/null && git blame --show-email HEAD~1 -- $1 | grep -E -o "<\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b>" | grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" | sort | uniq -c | while read line; do CHECK_OWNERSHIP "$FILE_SIZE $line $FILE_PATH"; done
+  git blame --show-email HEAD~1 -- $1 2> /dev/null | GET_EMAIL | sort | uniq -c\
+    | while read line; do CHECK_OWNERSHIP "$FILE_SIZE $line $FILE_PATH"; done
 }
 
 function FORESIGHT {
   echo "FORESIGHT!"
   echo "Looking into the past to save the future..."
   echo "-------------------------------------------"
-  git diff-tree --no-commit-id --name-only -r HEAD | while read line; do PROCESS_FILE "$line"; done | sort | uniq
+  git diff-tree --no-commit-id --name-only -r HEAD \
+    | while read line; do PROCESS_FILE "$line"; done | sort | uniq
   echo "-------------------------------------------"
   echo ""
 }
