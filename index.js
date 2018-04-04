@@ -1,5 +1,4 @@
-const processFile = require('modules/process-file'),
-      fs = require('fs'),
+const processFile = require('./modules/process-file'),
       cp = require('child_process'),
       writeHeader = () => {
         console.log('FORESIGHT!');
@@ -19,9 +18,12 @@ cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stde
 
   // split on lines to get the list of files
   stdout.split('\n').forEach((file) => {
-    processFile(file);
+    if (file) {
+      processFile(file);
+    }
   });
-
-  writeFooter();
 });
 
+process.on('exit', () => {
+  writeFooter();
+});

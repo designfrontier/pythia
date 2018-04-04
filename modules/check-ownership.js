@@ -9,8 +9,8 @@ module.exports = (details) => {
   // const file_path = lineParts[3];
   const ownership = (ownedLines / size) * 100;
 
-  return ownership >= 20) {
+  if (ownership >= 20) {
     addAuthor(author);
-    return `${author} owns: ${ownership} percent of ${file_path}`;
+    console.log(`${author} owns: ${ownership.toFixed(2)} percent of ${file_path}`);
   }
 };
