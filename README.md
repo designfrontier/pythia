@@ -7,9 +7,6 @@ For further reading see:
 - https://www.microsoft.com/en-us/research/publication/dont-touch-my-code-examining-the-effects-of-ownership-on-software-quality/
 
 ## usage
-To use Foresight you will need to source it in your env file
+`npm i -g foresight`
 
-So if you are using zsh you would add `. ~/path/to/foresight.sh` to your `.zshrc` file.
-Basically the same instructions for bash just in your `.bashrc` file.
-
-Then you will have `FORESIGHT` as a command that you can run from your console!
+Then you will have `foresight` as a command that you can run from your console!

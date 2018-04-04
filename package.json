@@ -1,10 +1,10 @@
 {
-  "name": "foresight",
+  "name": "pythia",
   "version": "0.1.0",
   "description": "Outputs the emails for each person with >20% ownership of any file in your commit.",
-  "main": "bin/foresight",
+  "main": "./bin/pythia",
   "bin": {
-    "foresight": "./bin/foresight"
+    "pythia": "./bin/pythia"
   },
   "scripts": {
     "test": "ava *.test.js modules/*.test.js"
