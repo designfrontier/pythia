@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/designfrontier/foresight.git"
+    "url": "git+https://github.com/designfrontier/pythia.git"
   },
   "keywords": [
     "bug",
@@ -22,10 +22,10 @@
   "author": "Daniel Sellers <daniel@designfrontier.net>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/designfrontier/foresight/issues"
+    "url": "https://github.com/designfrontier/pythia/issues"
   },
   "preferGlobal": true,
-  "homepage": "https://github.com/designfrontier/foresight#readme",
+  "homepage": "https://github.com/designfrontier/pythia#readme",
   "dependencies": {
     "ava": "^0.25.0",
     "split": "^1.0.1",
