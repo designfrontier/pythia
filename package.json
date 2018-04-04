@@ -7,7 +7,8 @@
     "pythia": "./bin/pythia"
   },
   "scripts": {
-    "test": "ava *.test.js modules/*.test.js"
+    "test": "ava *.test.js modules/*.test.js",
+    "release": "npm test && tom"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "homepage": "https://github.com/designfrontier/foresight#readme",
   "dependencies": {
     "ava": "^0.25.0",
-    "split": "^1.0.1"
+    "split": "^1.0.1",
+    "tom-sawyer": "^0.1.4"
   }
 }
