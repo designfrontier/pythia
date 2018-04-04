@@ -1,0 +1,28 @@
+{
+  "name": "foresight",
+  "version": "0.1.0",
+  "description": "Outputs the emails for each person with >20% ownership of any file in your commit.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava *.test.js modules/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/designfrontier/foresight.git"
+  },
+  "keywords": [
+    "bug",
+    "bugs",
+    "code-review"
+  ],
+  "author": "Daniel Sellers <daniel@designfrontier.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/designfrontier/foresight/issues"
+  },
+  "homepage": "https://github.com/designfrontier/foresight#readme",
+  "dependencies": {
+    "ava": "^0.25.0",
+    "split": "^1.0.1"
+  }
+}
