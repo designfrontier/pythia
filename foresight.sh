@@ -10,6 +10,7 @@ function ADD_AUTHOR {
 
 }
 
+#this is cool
 function CHECK_OWNERSHIP {
   local line=$1
   read -a input <<< "${line}"

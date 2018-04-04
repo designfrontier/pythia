@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+const processFile = require('../modules/process-file'),
+      cp = require('child_process'),
+      fs = require('fs'),
+      path = require('path'),
+      writeHeader = () => {
+        console.log('FORESIGHT!');
+        console.log('Looking into the past to save the future...');
+        console.log('-------------------------------------------');
+      },
+      writeFooter = () => {
+        console.log('-------------------------------------------');
+        console.log('');
+      };
+
+writeHeader();
+cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stderr) => {
+  if (error) {
+    console.log('Well.... something broke. Bad.');
+  }
+
+  // split on lines to get the list of files
+  stdout.split('\n').forEach((file) => {
+    const filePath = path.join(process.cwd(), file);
+
+    fs.stat(filePath, (err, stat) => {
+      if (!err && stat.isFile()) {
+        processFile(file);
+      }
+    });
+  });
+});
+
+process.on('exit', () => {
+  writeFooter();
+});

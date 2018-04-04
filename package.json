@@ -2,7 +2,10 @@
   "name": "foresight",
   "version": "0.1.0",
   "description": "Outputs the emails for each person with >20% ownership of any file in your commit.",
-  "main": "index.js",
+  "main": "bin/foresight",
+  "bin": {
+    "foresight": "./bin/foresight"
+  },
   "scripts": {
     "test": "ava *.test.js modules/*.test.js"
   },
@@ -20,6 +23,7 @@
   "bugs": {
     "url": "https://github.com/designfrontier/foresight/issues"
   },
+  "preferGlobal": true,
   "homepage": "https://github.com/designfrontier/foresight#readme",
   "dependencies": {
     "ava": "^0.25.0",

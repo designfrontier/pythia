@@ -1,11 +1,16 @@
 const fs = require('fs'),
       cp = require('child_process'),
       split = require('split'),
-      getEmail = require('modules/get-email'),
-      checkOwnership = require('modules/check-ownership'),
+      getEmail = require('./get-email'),
+      checkOwnership = require('./check-ownership'),
       getFileLength = (file, cb) => {
         let lines = 0;
-
+        
+        if (!file) {
+          cb();
+          return;
+        }
+        
         fs.createReadStream(file)
           .pipe(split())
           .on('data', (chunk) => {
@@ -15,24 +20,33 @@ const fs = require('fs'),
             cb(lines);
           });
       };
-      
+
 module.exports = (file) => {
   getFileLength(file, (lines) => {
     cp.exec(`git blame --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
       const emails = stdout.split('\n').reduce((accum, line) => {
         const email = getEmail(line);
+        if (!email) {
+          return accum;
+        }
 
         if (typeof accum[email] !== 'undefined') {
-          accum[email] = 1;
-        } else {
           accum[email] = accum[email] + 1;
+        } else {
+          accum[email] = 1;
         }
 
         return accum;
       }, {});
 
       Object.keys(emails).forEach((email) => {
-        checkOwnership({lines, emails[email], email, file})
+        // { size, ownedLines, author, file_path }
+        checkOwnership({
+          size: lines, 
+          ownedLines: emails[email],
+          author: email, 
+          file_path: file
+        });
       });
     });
   });
