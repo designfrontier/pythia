@@ -1,4 +1,9 @@
-### - 0.3.1 * 2018-4-6 12:44:36 *
+### - 0.3.2 * 2018-4-6 13:21:46 *
+
+   - Update check-ownership.js 
+
+
+ ### - 0.3.1 * 2018-4-6 12:44:36 *
 
    - Merge pull request #10 from designfrontier/fix-package-json
   - has dev deps in deps 
