@@ -47,7 +47,7 @@ look like this:
 ```
 {
   "exclude": {
-    "users": ["dsellers", "theOracle", "mreynolds"],
+    "users": ["dsellers@example.com", "theOracle@example.com", "mreynolds@example.com"],
     "files": ["readme.md", "history.md", "AUTHORS"],
     "directories": ["bin"]
   }
