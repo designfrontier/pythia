@@ -1,4 +1,10 @@
-### - 0.3.0 * 2018-4-6 10:47:08 *
+### - 0.3.1 * 2018-4-6 12:44:36 *
+
+   - Merge pull request #10 from designfrontier/fix-package-json
+  - has dev deps in deps 
+
+
+ ### - 0.3.0 * 2018-4-6 10:47:08 *
 
   
 
