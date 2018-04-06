@@ -29,7 +29,7 @@ ssh -p 29418 user@gerrit.bob.com gerrit set-reviewers -p my-project my-change-id
 ```
 
 Just to reiterate: `.pythia-publish` will be called once per author and the last
-argument to it will be the authors email.
+argument to it will be the author's email.
 
 Also: the `.pythia-publish` file needs to be executable (`chmod +x .pythia-publish`)
 and located in the root of your project (which is where you should call pythia from).
