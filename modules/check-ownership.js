@@ -7,7 +7,7 @@ module.exports = (details, publish) => {
 
   if (ownership >= 20 && author !== currentAuthor) {
     if (publish)  {
-      cp.execFile(path.join(process.cwd(), '.pythia-publish'), [author, ownership, filePath], (err, out) => {
+      cp.execFile(path.join(process.cwd(), '.pythia-publish'), [author, ownership.toFixed(2), filePath], (err, out) => {
         if (err) {
           console.log(err);
         }
