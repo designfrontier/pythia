@@ -21,12 +21,12 @@ const fs = require('fs'),
           });
       };
 
-module.exports = (file) => {
+module.exports = ({file, excludeUsers, publish, currentAuthor}) => {
   getFileLength(file, (lines) => {
     cp.exec(`git blame --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
       const emails = stdout.split('\n').reduce((accum, line) => {
         const email = getEmail(line);
-        if (!email) {
+        if (!email || excludeUsers.includes(email)) {
           return accum;
         }
 
@@ -45,8 +45,9 @@ module.exports = (file) => {
           size: lines, 
           ownedLines: emails[email],
           author: email, 
-          file_path: file
-        });
+          filePath: file,
+          currentAuthor
+        }, publish);
       });
     });
   });

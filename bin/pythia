@@ -4,14 +4,25 @@ const processFile = require('../modules/process-file'),
       cp = require('child_process'),
       fs = require('fs'),
       path = require('path'),
+      readConfig = require('../modules/read-config'),
       writeHeader = () => {
-        console.log('FORESIGHT!');
-        console.log('Looking into the past to save the future...');
+        console.log('\n\n\n');
+        console.log(fs.readFileSync(path.join(__dirname, '../modules/header.txt'), 'utf8'));
+        console.log('\nLooking into the past to save the future...\n');
         console.log('-------------------------------------------');
       },
       writeFooter = () => {
         console.log('-------------------------------------------');
         console.log('');
+      },
+      config = readConfig(),
+      publishReviewRequests = process.argv.includes('--publish') || process.argv.includes('-p')
+      isExcluded = (filePath) => {
+        const parsed = path.parse(filePath),
+              isExcludedFile = config.exclude.files.includes(parsed.base),
+              isExcludedDir = config.exclude.directories.includes(parsed.dir);
+
+        return isExcludedFile || isExcludedDir;
       };
 
 writeHeader();
@@ -20,14 +31,21 @@ cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stde
     console.log('Well.... something broke. Bad.');
   }
 
-  // split on lines to get the list of files
-  stdout.split('\n').forEach((file) => {
-    const filePath = path.join(process.cwd(), file);
+  cp.exec('git log --format="%ae" -n 1', (err, out) => {
+    // split on lines to get the list of files
+    stdout.split('\n').forEach((file) => {
+      const filePath = path.join(process.cwd(), file);
 
-    fs.stat(filePath, (err, stat) => {
-      if (!err && stat.isFile()) {
-        processFile(file);
-      }
+      fs.stat(filePath, (err, stat) => {
+        if (!err && stat.isFile() && !isExcluded(file)) {
+          processFile({
+            file, 
+            excludeUsers: config.exclude.users, 
+            publish: publishReviewRequests,
+            currentAuthor: out.replace(/\n$/, '')
+          });
+        }
+      });
     });
   });
 });

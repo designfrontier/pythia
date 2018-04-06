@@ -1,16 +1,22 @@
-const addAuthor = require('./add-author');
+const cp = require('child_process')
+      path = require('path');
 
-module.exports = (details) => {
-  const { size, ownedLines, author, file_path } = details;
-
-  // const size = lineParts[0];
-  // const ownedLines = lineParts[1];
-  // const author = lineParts[2];
-  // const file_path = lineParts[3];
+module.exports = (details, publish) => {
+  const { size, ownedLines, author, filePath, currentAuthor } = details;
   const ownership = (ownedLines / size) * 100;
 
-  if (ownership >= 20) {
-    addAuthor(author);
-    console.log(`${author} owns: ${ownership.toFixed(2)} percent of ${file_path}`);
+  if (ownership >= 20 && author !== currentAuthor) {
+    if (publish)  {
+      cp.exec(`${path.join(process.cwd(), './', '.pythia-publish')} ${author}` , (err, out) => {
+        if (err) {
+          console.log(err);
+        }
+
+        if (out !== '' && out !== '\n' && out !== ' ') {
+          console.log(out.replace(/\n$/, ''));
+        }
+      });
+    }
+    console.log(`${author} owns: ${ownership.toFixed(2)} percent of ${filePath}`);
   }
 };
