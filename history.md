@@ -1,4 +1,9 @@
-### - 0.2.2 * 2018-4-6 10:46:52 *
+### - 0.3.0 * 2018-4-6 10:47:08 *
+
+  
+
+
+ ### - 0.2.2 * 2018-4-6 10:46:52 *
 
    - Merge pull request #8 from rwstauner/emails
   - Merge pull request #9 from rwstauner/whitespace
