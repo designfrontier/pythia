@@ -23,7 +23,7 @@ const fs = require('fs'),
 
 module.exports = ({file, excludeUsers, publish, currentAuthor}) => {
   getFileLength(file, (lines) => {
-    cp.exec(`git blame --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
+    cp.exec(`git blame -w --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
       const emails = stdout.split('\n').reduce((accum, line) => {
         const email = getEmail(line);
         if (!email || excludeUsers.includes(email)) {
