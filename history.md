@@ -1,4 +1,10 @@
-### - 0.3.2 * 2018-4-6 13:21:46 *
+### - 0.4.0 * 2018-4-6 16:22:26 *
+
+   - Merge pull request #11 from rwstauner/file-paths
+  - Exclude full file paths rather than base name 
+
+
+ ### - 0.3.2 * 2018-4-6 13:21:46 *
 
    - Update check-ownership.js 
 
