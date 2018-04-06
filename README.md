@@ -53,6 +53,3 @@ look like this:
   }
 }
 ```
-
-Note that the `files` entries will apply to any file with that name in any directory
-so use it judiciously.

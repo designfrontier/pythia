@@ -19,7 +19,7 @@ const processFile = require('../modules/process-file'),
       publishReviewRequests = process.argv.includes('--publish') || process.argv.includes('-p')
       isExcluded = (filePath) => {
         const parsed = path.parse(filePath),
-              isExcludedFile = config.exclude.files.includes(parsed.base),
+              isExcludedFile = config.exclude.files.includes(filePath),
               isExcludedDir = config.exclude.directories.includes(parsed.dir);
 
         return isExcludedFile || isExcludedDir;
