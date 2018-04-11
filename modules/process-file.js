@@ -21,7 +21,7 @@ const fs = require('fs'),
           });
       };
 
-module.exports = ({file, excludeUsers, publish, currentAuthor}) => {
+module.exports = ({file, excludeUsers, publish, currentAuthor, config}) => {
   getFileLength(file, (lines) => {
     cp.exec(`git blame -w --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
       const emails = stdout.split('\n').reduce((accum, line) => {
@@ -46,7 +46,8 @@ module.exports = ({file, excludeUsers, publish, currentAuthor}) => {
           ownedLines: emails[email],
           author: email, 
           filePath: file,
-          currentAuthor
+          currentAuthor,
+          threshold: config.threshold
         }, publish);
       });
     });

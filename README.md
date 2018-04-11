@@ -41,6 +41,12 @@ exclude users, directories, or files from being processed and reported. This is
 useful when people leave your team, or when you have files and directories that
 are auto-generated.
 
+The config file also allows you to change the threshold of ownership that adds
+people to the review, and outputs their names. By default only users with 20% or
+greater ownership of a file are output, and sent to yhe publish script. Now you
+can change that to any number you would like (though >=20% is the number most
+supported by the research).
+
 The `.pythia-config` file should be a JSON formatted file and its contents should
 look like this:
 
@@ -50,6 +56,7 @@ look like this:
     "users": ["dsellers@example.com", "theOracle@example.com", "mreynolds@example.com"],
     "files": ["readme.md", "history.md", "AUTHORS"],
     "directories": ["bin"]
-  }
+  },
+  "threshold": 20
 }
 ```

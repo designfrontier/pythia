@@ -4,7 +4,9 @@ const fs = require('fs'),
 
 module.exports = (location = '.') => {
   const filePath = path.join(process.cwd(), location, '.pythia-config');
-  const exclude = fs.existsSync(filePath) && readFile(filePath).exclude ? readFile(filePath).exclude : {};
+  const configFile = fs.existsSync(filePath) ? readFile(filePath) : {};
+  const exclude = configFile.exclude ? readFile(filePath).exclude : {};
+  const threshold = configFile.threshold || 20;
 
   ['users', 'directories', 'files'].forEach((item) => {
     if (typeof exclude[item] === 'undefined') {
@@ -13,6 +15,7 @@ module.exports = (location = '.') => {
   });
 
   return {
-  	exclude
+  	exclude,
+    threshold
   };
 };

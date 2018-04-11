@@ -42,7 +42,8 @@ cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stde
             file, 
             excludeUsers: config.exclude.users, 
             publish: publishReviewRequests,
-            currentAuthor: out.replace(/\n$/, '')
+            currentAuthor: out.replace(/\n$/, ''),
+            config
           });
         }
       });
