@@ -1,4 +1,9 @@
-### - 0.5.0 * 2018-4-11 06:32:26 *
+### - 0.5.1 * 2018-4-11 06:38:04 *
+
+   - cleaning up the readme a bit 
+
+
+ ### - 0.5.0 * 2018-4-11 06:32:26 *
 
    - Adds ability to pass in a config file as an arg
   - Adds the ability to set the threshold in config
