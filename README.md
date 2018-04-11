@@ -31,7 +31,7 @@ ssh -p 29418 user@gerrit.bob.com gerrit set-reviewers -p my-project my-change-id
 
 The three arguments are passed in a call that looks like:
 ```
-	./.pythia-publish daniel@some-website.com 93.25 somefile-path.md
+./.pythia-publish daniel@some-website.com 93.25 somefile-path.md
 ```
 
 So in bash that means
