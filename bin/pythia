@@ -15,7 +15,17 @@ const processFile = require('../modules/process-file'),
         console.log('-------------------------------------------');
         console.log('');
       },
-      config = readConfig(),
+      getConfigFileLocation = () => {
+        const indx = process.argv.indexOf('--config') + 1;
+        
+        if (indx + 1 > process.argv.length || /^--/.exec(process.argv[indx])) {
+          console.log('Please provide a file with your --config flag');
+          process.exit(1);
+        }
+        
+        return process.argv.indexOf('--config') > 0 ? process.argv[indx] : undefined;
+      }
+      config = readConfig(getConfigFileLocation()),
       publishReviewRequests = process.argv.includes('--publish') || process.argv.includes('-p')
       isExcluded = (filePath) => {
         const parsed = path.parse(filePath),

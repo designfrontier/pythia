@@ -60,3 +60,12 @@ look like this:
   "threshold": 20
 }
 ```
+
+### command line argument
+
+You may also pass the location of your config file ar runtime with the `--config`
+option. This allows you to store your config in whatever file you would like. It
+still needs to conform to the structure laid out above though.
+
+As an example: `pythia --config pythia.json` where `pythia.json` is at the root
+of your project.
