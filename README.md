@@ -17,8 +17,9 @@ Then you will have `pythia` as a command that you can run from your console!
 
 Adding `-p` or `--publish` to pythia will run the publish config and send the list
 of reviewers to your code review system. It does this by calling `.pythia-publish`
-passing it the email of the author. You can write a `.pythia-publish` file to do whatever
-you need it to do for your review system.
+passing it the email of the author, ownership percentage, and location of the file. 
+You can write a `.pythia-publish` file to do whatever you need it to do for your 
+review system.
 
 As an example, for gerrit you might do something like this:
 
@@ -26,6 +27,18 @@ As an example, for gerrit you might do something like this:
 #! /bin/sh
 
 ssh -p 29418 user@gerrit.bob.com gerrit set-reviewers -p my-project my-change-id-here -a $1
+```
+
+The three arguments are passed in a call that looks like:
+```
+	./.pythia-publish daniel@some-website.com 93.25 somefile-path.md
+```
+
+So in bash that means
+```
+$1 = author's email
+$2 = percentage of ownership
+$3 = the file that is owned
 ```
 
 Just to reiterate: `.pythia-publish` will be called once per author and the last
