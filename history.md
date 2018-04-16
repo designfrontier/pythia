@@ -1,4 +1,23 @@
-### - 0.5.2 * 2018-4-11 06:38:46 *
+### - 0.5.3 * 2018-4-16 10:38:12 *
+
+   - Merge pull request #16 from designfrontier/bug/dir-to-regex-exclude
+  - fixes a bug where sub-directories escaped the exclude
+  - 0.5.2
+  - preparing for release of v0.5.2
+  - 0.5.1
+  - preparing for release of v0.5.1
+  - cleaning up the readme a bit
+  - 0.5.0
+  - preparing for release of v0.5.0
+  - Adds ability to pass in a config file as an arg
+  - Adds the ability to set the threshold in config
+  - Merge pull request #14 from designfrontier/add-license-1
+  - Create LICENSE
+  - Merge pull request #13 from designfrontier/add-code-of-conduct-1
+  - Create CODE_OF_CONDUCT.md 
+
+
+ ### - 0.5.2 * 2018-4-11 06:38:46 *
 
   
 
