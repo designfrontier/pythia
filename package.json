@@ -31,6 +31,8 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
+    "github-username": "^4.1.0",
+    "peanut-gallery": "^1.2.0",
     "tom-sawyer": "^0.1.4"
   }
 }
