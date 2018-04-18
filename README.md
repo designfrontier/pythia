@@ -1,5 +1,7 @@
 # pythia
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/designfrontier/pythia.svg)](https://greenkeeper.io/)
+
 *formerly known as foresight*
 
 Outputs the emails for each person with >20% ownership of any file in your commit. Involving these owners in communication about changes to files they own has been shown to reduce the number of bugs in research done by microsoft.
