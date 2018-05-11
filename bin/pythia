@@ -30,7 +30,7 @@ const processFile = require('../modules/process-file'),
       isExcluded = (filePath) => {
         const parsed = path.parse(filePath),
               isExcludedFile = config.exclude.files.includes(filePath),
-              isExcludedDir = new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir);
+              isExcludedDir = config.exclude.directories.length > 0 && new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir);
 
         return isExcludedFile || isExcludedDir;
       };
@@ -45,7 +45,6 @@ cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stde
     // split on lines to get the list of files
     stdout.split('\n').forEach((file) => {
       const filePath = path.join(process.cwd(), file);
-
       fs.stat(filePath, (err, stat) => {
         if (!err && stat.isFile() && !isExcluded(file)) {
           processFile({
@@ -62,5 +61,6 @@ cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stde
 });
 
 process.on('exit', () => {
+  //finished
   writeFooter();
 });

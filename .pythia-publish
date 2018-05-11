@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const githubUsername = require('github-username');
+const pg = require('peanut-gallery');
+const file = process.argv.pop();
+const ownership = process.argv.pop();
+const email = process.argv.pop();
+ 
+ 
+githubUsername(email).then(username => {
+    console.log(`${username} owns ${ownership} of ${file}`);
+
+	pg.comment( `${username} owns ${ownership} of ${file}`, ( err, response ) => {
+	  console.log( response.url );
+	} );
+});
