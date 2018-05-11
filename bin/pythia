@@ -18,24 +18,32 @@ const processFile = require('../modules/process-file'),
       getConfigFileLocation = () => {
         const indx = process.argv.indexOf('--config') + 1;
 
-        if (indx + 1 > process.argv.length || /^--/.exec(process.argv[indx])) {
+        if (indx + 1 > process.argv.length || /^-/.exec(process.argv[indx])) {
           console.log('Please provide a file with your --config flag');
           process.exit(1);
         }
 
         return process.argv.indexOf('--config') > 0 ? process.argv[indx] : undefined;
-      }
-      config = readConfig(getConfigFileLocation()),
-      publishReviewRequests = process.argv.includes('--publish') || process.argv.includes('-p')
+      },
+      getPublishFileLocation = () => {
+        const originalIndex = process.argv.indexOf('--publish') || process.argv.indexOf('-p');
+        const indx = originalIndex  + 1;
+
+        return originalIndex > 0 ? process.argv[indx] : undefined;
+      },
+      config = readConfig({configFile: getConfigFileLocation(), publish: getPublishFileLocation()}),
+      publishReviewRequests = !!(process.argv.indexOf('--publish') || process.argv.indexOf('-p')),
       isExcluded = (filePath) => {
         const parsed = path.parse(filePath),
               isExcludedFile = config.exclude.files.includes(filePath),
-              isExcludedDir = new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir);
+              isExcludedDir = config.exclude.directories.length > 0 &&
+                new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir);
 
         return isExcludedFile || isExcludedDir;
       };
 
 writeHeader();
+
 cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stderr) => {
   if (error) {
     console.log('Well.... something broke. Bad.');
@@ -47,6 +55,7 @@ cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stde
       const filePath = path.join(process.cwd(), file);
 
       fs.stat(filePath, (err, stat) => {
+        console.log(file, !err && stat.isFile() && !isExcluded(file));
         if (!err && stat.isFile() && !isExcluded(file)) {
           processFile({
             file,

@@ -2,12 +2,13 @@ const cp = require('child_process')
       path = require('path');
 
 module.exports = (details, publish) => {
-  const { size, ownedLines, author, filePath, currentAuthor, threshold } = details;
+  const { size, ownedLines, author, filePath, currentAuthor, config } = details;
   const ownership = (ownedLines / size) * 100;
 
-  if (ownership >= threshold && author !== currentAuthor) {
+  if (ownership >= config.threshold /*&& author !== currentAuthor*/) {
     if (publish)  {
-      cp.execFile(path.join(process.cwd(), '.pythia-publish'), [author, ownership.toFixed(2), filePath], (err, out) => {
+      console.log(config);
+      cp.execFile(path.join(process.cwd(), config.publish), [author, ownership.toFixed(2), filePath], (err, out) => {
         if (err) {
           console.log(err);
         }
