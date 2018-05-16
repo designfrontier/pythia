@@ -15,12 +15,14 @@ module.exports = ({ location = '.pythia-config', publish}) => {
     }
   });
 
-// TODO make this bail if there is no actual file... or if a non-file is passed
-//  in to the publish argument
-  if (indx + 1 > process.argv.length || /^-/.exec(process.argv[indx])) {
-  console.log('Please provide a file with your --publish flag');
-  process.exit(1);
-}
+  if (publish) {
+    try {
+      fs.statSync(path.join(process.cwd(), publish)).isFile();
+    } catch (e) {
+      console.log('Please provide a file with your --publish or -p flag');
+      process.exit(1);
+    }
+  }
 
   return {
   	exclude,

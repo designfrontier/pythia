@@ -7,7 +7,6 @@ const processFile = require('../modules/process-file'),
       readConfig = require('../modules/read-config'),
       writeHeader = () => {
         console.log('\n\n\n');
-        console.log(fs.readFileSync(path.join(__dirname, '../modules/header.txt'), 'utf8'));
         console.log('\nLooking into the past to save the future...\n');
         console.log('-------------------------------------------');
       },
@@ -26,9 +25,11 @@ const processFile = require('../modules/process-file'),
         return process.argv.indexOf('--config') > 0 ? process.argv[indx] : undefined;
       },
       getPublishFileLocation = () => {
-        const originalIndex = process.argv.indexOf('--publish') || process.argv.indexOf('-p');
+        const flagPublish = process.argv.indexOf('--publish');
+        const flagP = process.argv.indexOf('-p');
+        const originalIndex = flagPublish >= 0 ? flagPublish : flagP;
         const indx = originalIndex  + 1;
-
+        
         return originalIndex > 0 ? process.argv[indx] : undefined;
       },
       config = readConfig({configFile: getConfigFileLocation(), publish: getPublishFileLocation()}),
@@ -55,7 +56,6 @@ cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stde
       const filePath = path.join(process.cwd(), file);
 
       fs.stat(filePath, (err, stat) => {
-        console.log(file, !err && stat.isFile() && !isExcluded(file));
         if (!err && stat.isFile() && !isExcluded(file)) {
           processFile({
             file,

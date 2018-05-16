@@ -4,11 +4,18 @@ const cp = require('child_process')
 module.exports = (details, publish) => {
   const { size, ownedLines, author, filePath, currentAuthor, config } = details;
   const ownership = (ownedLines / size) * 100;
+  const publishFile = path.join(process.cwd(), config.publish);
 
   if (ownership >= config.threshold /*&& author !== currentAuthor*/) {
     if (publish)  {
-      console.log(config);
-      cp.execFile(path.join(process.cwd(), config.publish), [author, ownership.toFixed(2), filePath], (err, out) => {
+      try {
+        fs.statSync(publishFile).isFile();
+      } catch (e) {
+        console.log('Your publish script does not seem to exist?');
+        process.exit(1);
+      }
+
+      cp.execFile(publishFile, [author, ownership.toFixed(2), filePath], (err, out) => {
         if (err) {
           console.log(err);
         }
