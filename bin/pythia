@@ -25,10 +25,10 @@ const processFile = require('../modules/process-file'),
         return process.argv.indexOf('--config') > 0 ? process.argv[indx] : undefined;
       },
       getPublishFileLocation = () => {
-        const flagPublish = process.argv.indexOf('--publish');
-        const flagP = process.argv.indexOf('-p');
-        const originalIndex = flagPublish >= 0 ? flagPublish : flagP;
-        const indx = originalIndex  + 1;
+        const flagPublish = process.argv.indexOf('--publish'),
+              flagP = process.argv.indexOf('-p'),
+              originalIndex = flagPublish >= 0 ? flagPublish : flagP,
+              indx = originalIndex  + 1;
         
         return originalIndex > 0 ? process.argv[indx] : undefined;
       },

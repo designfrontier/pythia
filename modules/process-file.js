@@ -26,6 +26,7 @@ module.exports = ({file, excludeUsers, publish, currentAuthor, config}) => {
     cp.exec(`git blame -w --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
       const emails = stdout.split('\n').reduce((accum, line) => {
         const email = getEmail(line);
+        
         if (!email || excludeUsers.includes(email)) {
           return accum;
         }
