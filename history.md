@@ -1,4 +1,12 @@
-### - 0.5.3 * 2018-4-16 10:38:12 *
+### - 0.5.4 * 6/25/2018, 10:13:08 PM *
+
+   - security fix
+  - Merge pull request #19 from designfrontier/greenkeeper/initial
+  - docs(readme): add Greenkeeper badge
+  - Delete foresight.sh 
+
+
+ ### - 0.5.3 * 2018-4-16 10:38:12 *
 
    - Merge pull request #16 from designfrontier/bug/dir-to-regex-exclude
   - fixes a bug where sub-directories escaped the exclude
