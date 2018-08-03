@@ -1,4 +1,16 @@
-### - 0.5.4 * 6/25/2018, 10:13:08 PM *
+### - 0.5.5 * 2018-8-3 12:46:36 *
+
+   - Merge pull request #21 from phallstrom/is-excluded
+  - fix excluded directory trailing slash bug
+  - 0.5.4
+  - preparing for release of v0.5.4
+  - security fix
+  - Merge pull request #19 from designfrontier/greenkeeper/initial
+  - docs(readme): add Greenkeeper badge
+  - Delete foresight.sh 
+
+
+ ### - 0.5.4 * 6/25/2018, 10:13:08 PM *
 
    - security fix
   - Merge pull request #19 from designfrontier/greenkeeper/initial
