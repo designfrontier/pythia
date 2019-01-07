@@ -1,4 +1,12 @@
-### - 0.5.5 * 2018-8-3 12:46:36 *
+### - 0.5.6 * 2019-1-7 10:12:09 *
+
+   - updated versions of ava
+  - Merge pull request #22 from designfrontier/greenkeeper/ava-1.0.1
+  - chore(package): update lockfile package-lock.json
+  - chore(package): update ava to version 1.0.1 
+
+
+ ### - 0.5.5 * 2018-8-3 12:46:36 *
 
    - Merge pull request #21 from phallstrom/is-excluded
   - fix excluded directory trailing slash bug
