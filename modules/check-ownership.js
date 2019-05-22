@@ -1,13 +1,16 @@
-const cp = require('child_process')
-      path = require('path');
+const cp = require('child_process'),
+      fs = require('fs'),
+      path = require('path'),
+      checkForPublishFile = require('./check-for-publish-file');
 
 module.exports = (details, publish) => {
-  const { size, ownedLines, author, filePath, currentAuthor, threshold } = details;
-  const ownership = (ownedLines / size) * 100;
+  const { size, ownedLines, author, filePath, currentAuthor, config } = details,
+        ownership = (ownedLines / size) * 100,
+        publishFile = config.publish;
 
-  if (ownership >= threshold && author !== currentAuthor) {
-    if (publish)  {
-      cp.execFile(path.join(process.cwd(), '.pythia-publish'), [author, ownership.toFixed(2), filePath], (err, out) => {
+  if (ownership >= config.threshold && author !== currentAuthor) {
+    if (publish && checkForPublishFile(publishFile)) {
+      cp.execFile(publishFile, [author, ownership.toFixed(2), filePath], (err, out) => {
         if (err) {
           console.log(err);
         }
