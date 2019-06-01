@@ -30,7 +30,7 @@
     "split": "^1.0.1"
   },
   "devDependencies": {
-    "ava": "^1.0.1",
+    "ava": "^2.0.0",
     "tom-sawyer": "^0.1.6"
   }
 }
