@@ -12,6 +12,10 @@
     "files": [
       "file-one",
       "file-two"
-    ]
+    ],
+    "comments": {
+        "rb": "#",
+        "js": "//"
+    }
   }
 }

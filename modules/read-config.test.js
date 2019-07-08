@@ -7,7 +7,8 @@ test('for an empty config file', t => {
     exclude: {
       users: [],
       directories: [],
-      files: []
+      files: [],
+      comments: {}
     }
   });
 });
@@ -32,13 +33,18 @@ test('for a config file with excluded files', t => {
   t.deepEqual(readConfig('fixtures/.exclude-files-config').exclude.files, ['file-one', 'file-two']);
 });
 
+test('for a config file with excluded comments', t => {
+  t.deepEqual(readConfig('fixtures/.exclude-comments-config').exclude.comments, { rb: '#', js: '//' });
+});
+
 test('for a full featured config file', t => {
   t.deepEqual(readConfig('fixtures/.pythia-config'), {
     threshold: 43,
     exclude: {
       users: ['test1@example.com', 'test2@example.com'],
       directories: ['dir-one', 'dir-two'],
-      files: ['file-one', 'file-two']
+      files: ['file-one', 'file-two'],
+      comments: { rb: '#', js: '//' }
     }
   });
 });

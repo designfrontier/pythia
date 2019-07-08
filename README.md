@@ -70,11 +70,15 @@ look like this:
   "exclude": {
     "users": ["dsellers@example.com", "theOracle@example.com", "mreynolds@example.com"],
     "files": ["readme.md", "history.md", "AUTHORS"],
-    "directories": ["bin"]
+    "directories": ["bin"],
+    "comments": { "rb": "#", "js": "//" }
   },
   "threshold": 20
 }
 ```
+
+With `exclude.comments`, you can exclude lines starting with specific characters 
+for the given file extensions. 
 
 ### command line argument
 
