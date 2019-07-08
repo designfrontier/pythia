@@ -1,0 +1,8 @@
+{
+  "exclude": {
+    "directories": [
+      "dir-one",
+      "dir-two"
+    ]
+  }
+}

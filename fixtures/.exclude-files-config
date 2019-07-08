@@ -1,0 +1,8 @@
+{
+  "exclude": {
+    "files": [
+      "file-one",
+      "file-two"
+    ]
+  }
+}

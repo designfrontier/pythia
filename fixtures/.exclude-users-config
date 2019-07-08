@@ -1,0 +1,8 @@
+{
+  "exclude": {
+    "users": [
+      "test1@example.com",
+      "test2@example.com"
+    ]
+  }
+}
