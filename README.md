@@ -71,7 +71,7 @@ look like this:
     "users": ["dsellers@example.com", "theOracle@example.com", "mreynolds@example.com"],
     "files": ["readme.md", "history.md", "AUTHORS"],
     "directories": ["bin"],
-    "comments": { "rb": "#", "js": "//" }
+    "comments": { ".rb": "#", ".js": "//" }
   },
   "threshold": 20
 }

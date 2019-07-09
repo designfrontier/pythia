@@ -1,32 +1,39 @@
 const fs = require('fs'),
-      cp = require('child_process'),
-      split = require('split'),
-      getEmail = require('./get-email'),
-      utils = require('./check-ownership'),
-      getFileLength = (file, cb) => {
-        let lines = 0;
+  cp = require('child_process'),
+  path = require('path'),
+  split = require('split'),
+  getEmail = require('./get-email'),
+  utils = require('./check-ownership'),
+  isCommentLine = (line, commentChar) => commentChar && RegExp(`^\\s*${commentChar}.*`, 'i').test(line),
+  getFileLength = (file, config, cb) => {
+    const commentChar = config.exclude.comments[path.extname(file)];
+    const commentIndices = [];
+    let currentLine = 0;
 
-        if (!file) {
-          cb();
-          return;
+    if (!file) {
+      cb();
+      return;
+    }
+
+    fs.createReadStream(file)
+      .pipe(split(null, null, { trailing: false }))
+      .on('data', (chunk) => {
+        if (isCommentLine(chunk, commentChar)) {
+          commentIndices.push(currentLine);
         }
-
-        fs.createReadStream(file)
-          .pipe(split(null, null, { trailing: false }))
-          .on('data', (chunk) => {
-            lines++;
-          })
-          .on('end', () => {
-            cb(lines);
-          });
-      };
+        currentLine++;
+      })
+      .on('end', () => {
+        cb(currentLine - commentIndices.length, commentIndices);
+      });
+  };
 
 module.exports = ({file, excludeUsers, publish, currentAuthor, config}) => {
-  getFileLength(file, (lines) => {
+  getFileLength(file, config, (lines, commentIndices) => {
     cp.exec(`git blame -w --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
-      const emails = stdout.split('\n').reduce((accum, line) => {
+      const emails = stdout.split('\n').reduce((accum, line, lineIndex) => {
         const email = getEmail(line);
-        if (!email || excludeUsers.includes(email)) {
+        if (!email || excludeUsers.includes(email) || commentIndices.includes(lineIndex)) {
           return accum;
         }
 
@@ -39,8 +46,6 @@ module.exports = ({file, excludeUsers, publish, currentAuthor, config}) => {
         return accum;
 
       }, {});
-
-
 
       Object.keys(emails).forEach((email) => {
         // { size, ownedLines, author, file_path }

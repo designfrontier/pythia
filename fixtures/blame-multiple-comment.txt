@@ -1,0 +1,6 @@
+9a93ec03 (<alice@example.com> 2018-04-03 22:10:49 -0600 1)  // js comment here 1
+9a93ec03 (<alice@example.com> 2018-04-03 22:10:49 -0600 2)  console.log("a");
+9a93ec03 (<alice@example.com> 2018-04-03 22:10:49 -0600 3)  // js comment here 2
+9a93ec03 (<alice@example.com> 2018-04-03 22:10:49 -0600 4)  console.log("b");
+8a83ec04 (<bob@example.com>   2018-04-03 23:10:49 -0600 5)  console.log("c");
+8a83ec04 (<bob@example.com>   2018-04-03 23:10:49 -0600 6)  // js comment here 3
