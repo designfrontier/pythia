@@ -25,7 +25,7 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 3,
-      size: 5,
+      size: 4,
       threshold: config.threshold,
     });
     t.is(givenPublish, publish);
@@ -36,7 +36,7 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 1,
-      size: 5,
+      size: 4,
       threshold: config.threshold,
     });
     t.is(givenPublish, publish);

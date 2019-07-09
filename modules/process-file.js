@@ -12,7 +12,7 @@ const fs = require('fs'),
         }
 
         fs.createReadStream(file)
-          .pipe(split())
+          .pipe(split(null, null, { trailing: false }))
           .on('data', (chunk) => {
             lines++;
           })
@@ -37,6 +37,7 @@ module.exports = ({file, excludeUsers, publish, currentAuthor, config}) => {
         }
 
         return accum;
+
       }, {});
 
 
