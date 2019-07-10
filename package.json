@@ -31,6 +31,6 @@
   },
   "devDependencies": {
     "ava": "^2.2.0",
-    "tom-sawyer": "^0.1.6"
+    "tom-sawyer": "^0.1.7"
   }
 }
