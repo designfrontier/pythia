@@ -7,7 +7,7 @@
     "pythia": "./bin/pythia"
   },
   "scripts": {
-    "test": "ava *.test.js modules/*.test.js",
+    "test": "ava **/*.test.js",
     "release": "npm test && tom"
   },
   "repository": {
@@ -30,7 +30,7 @@
     "split": "^1.0.1"
   },
   "devDependencies": {
-    "ava": "^1.0.1",
-    "tom-sawyer": "^0.1.6"
+    "ava": "^2.2.0",
+    "tom-sawyer": "^0.1.7"
   }
 }
