@@ -1,4 +1,13 @@
-### - 0.5.6 * 2019-1-7 10:12:09 *
+### - 0.5.7 * 7/10/2019, 10:05:09 AM *
+
+   - Merge pull request #25 from designfrontier/greenkeeper/ava-2.2.0
+  - Closes vulnerabilities
+  - Updates the lock file and the test command
+  - chore(package): update lockfile package-lock.json
+  - chore(package): update ava to version 2.2.0 
+
+
+ ### - 0.5.6 * 2019-1-7 10:12:09 *
 
    - updated versions of ava
   - Merge pull request #22 from designfrontier/greenkeeper/ava-1.0.1
