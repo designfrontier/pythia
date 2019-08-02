@@ -1,4 +1,9 @@
-### - 0.5.8 * 8/1/2019, 8:21:52 PM *
+### - 0.5.9 * 8/1/2019, 8:22:06 PM *
+
+  
+
+
+ ### - 0.5.8 * 8/1/2019, 8:21:52 PM *
 
    - Update vulnerable sub dependencies
   - Merge pull request #24 from pjozsef/master
