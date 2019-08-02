@@ -1,4 +1,17 @@
-### - 0.5.7 * 7/10/2019, 10:05:09 AM *
+### - 0.5.8 * 8/1/2019, 8:21:52 PM *
+
+   - Update vulnerable sub dependencies
+  - Merge pull request #24 from pjozsef/master
+  - Merge branch 'master' into master
+  - feat(process): do not count comments
+  - fix(process): do not count empty buffer in pipeline stream
+  - Trying to come up with a testcase for processFile
+  - feat(config): enable the exclusion of commented lines in config
+  - chore(gitignore): ignore .idea folder
+  - test(config): add test cases for parsing config file 
+
+
+ ### - 0.5.7 * 7/10/2019, 10:05:09 AM *
 
    - Merge pull request #25 from designfrontier/greenkeeper/ava-2.2.0
   - Closes vulnerabilities
