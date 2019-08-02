@@ -1,0 +1,21 @@
+{
+  "threshold": 43,
+  "exclude": {
+    "users": [
+      "test1@example.com",
+      "test2@example.com"
+    ],
+    "directories": [
+      "dir-one",
+      "dir-two"
+    ],
+    "files": [
+      "file-one",
+      "file-two"
+    ],
+    "comments": {
+        "rb": "#",
+        "js": "//"
+    }
+  }
+}

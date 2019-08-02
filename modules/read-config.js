@@ -14,6 +14,10 @@ module.exports = (location = '.pythia-config') => {
     }
   });
 
+  if (typeof exclude.comments === 'undefined') {
+    exclude.comments = {};
+  }
+
   return {
   	exclude,
     threshold

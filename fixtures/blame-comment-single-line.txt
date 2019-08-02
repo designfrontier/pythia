@@ -1,0 +1,2 @@
+9a93ec03 (<alice@example.com> 2018-04-03 22:10:49 -0600 1) # ruby comment here
+9a93ec03 (<alice@example.com> 2018-04-03 22:10:49 -0600 1) puts 'hello'

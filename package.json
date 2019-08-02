@@ -7,7 +7,7 @@
     "pythia": "./bin/pythia"
   },
   "scripts": {
-    "test": "ava **/*.test.js",
+    "test": "ava *.test.js modules/*.test.js --serial",
     "release": "npm test && tom"
   },
   "repository": {
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "ava": "^2.2.0",
+    "sinon": "^7.3.2",
     "tom-sawyer": "^0.1.7"
   }
 }

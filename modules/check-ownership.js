@@ -1,7 +1,7 @@
 const cp = require('child_process')
       path = require('path');
 
-module.exports = (details, publish) => {
+module.exports.checkOwnership = (details, publish) => {
   const { size, ownedLines, author, filePath, currentAuthor, threshold } = details;
   const ownership = (ownedLines / size) * 100;
 
