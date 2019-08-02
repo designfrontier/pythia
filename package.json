@@ -1,6 +1,6 @@
 {
   "name": "pythia",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Outputs the emails for each person with >20% ownership of any file in your commit.",
   "main": "./bin/pythia",
   "bin": {
@@ -30,8 +30,8 @@
     "split": "^1.0.1"
   },
   "devDependencies": {
-    "ava": "^1.0.1",
+    "ava": "^2.2.0",
     "sinon": "^7.3.2",
-    "tom-sawyer": "^0.1.6"
+    "tom-sawyer": "^0.1.7"
   }
 }
