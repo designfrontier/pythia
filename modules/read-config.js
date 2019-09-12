@@ -8,11 +8,14 @@ module.exports = (location = '.pythia-config') => {
   const exclude = configFile.exclude ? readFile(filePath).exclude : {};
   const threshold = configFile.threshold || 20;
 
-  ['users', 'directories', 'files'].forEach((item) => {
+  ['users', 'directories', 'files', 'shas'].forEach((item) => {
     if (typeof exclude[item] === 'undefined') {
       exclude[item] = [];
     }
   });
+
+  // convert all shas to short version
+  exclude.shas = exclude.shas.map(i => i.substring(0,8));
 
   if (typeof exclude.comments === 'undefined') {
     exclude.comments = {};

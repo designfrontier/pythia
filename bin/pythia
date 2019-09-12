@@ -30,7 +30,9 @@ const processFile = require('../modules/process-file'),
       isExcluded = (filePath) => {
         const parsed = path.parse(filePath),
               isExcludedFile = config.exclude.files.includes(filePath),
-              isExcludedDir = new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir);
+              isExcludedDir = config.exclude.directories.length
+                ? new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir)
+                : false;
 
         return isExcludedFile || isExcludedDir;
       };

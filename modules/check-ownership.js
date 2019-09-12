@@ -3,7 +3,9 @@ const cp = require('child_process')
 
 module.exports.checkOwnership = (details, publish) => {
   const { size, ownedLines, author, filePath, currentAuthor, threshold } = details;
-  const ownership = (ownedLines / size) * 100;
+  const ownership = (ownedLines / size) * 100 > 100
+    ? 100 // cap ownership percentage at 100%
+    : (ownedLines / size) * 100;
 
   if (ownership >= threshold && author !== currentAuthor) {
     if (publish)  {

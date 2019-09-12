@@ -8,7 +8,8 @@ test('for an empty config file', t => {
       users: [],
       directories: [],
       files: [],
-      comments: {}
+      comments: {},
+      shas: []
     }
   });
 });
@@ -44,7 +45,8 @@ test('for a full featured config file', t => {
       users: ['test1@example.com', 'test2@example.com'],
       directories: ['dir-one', 'dir-two'],
       files: ['file-one', 'file-two'],
-      comments: { rb: '#', js: '//' }
+      comments: { rb: '#', js: '//' },
+      shas: []
     }
   });
 });

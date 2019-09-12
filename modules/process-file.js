@@ -32,7 +32,16 @@ module.exports = ({file, excludeUsers, publish, currentAuthor, config}) => {
   getFileLength(file, config, (lines, commentIndices) => {
     cp.exec(`git blame -w --show-email HEAD~1 -- ${file}`, (error, stdout, stderr) => {
       const emails = stdout.split('\n').reduce((accum, line, lineIndex) => {
-        const email = getEmail(line);
+        const sha = line.split(' ').shift();
+        let prevBlame;
+
+        if (config.exclude.shas.includes(sha)) {
+          // if this line has a blacklisted sha... get the previous versions change
+          prevBlame = cp.execSync(`git blame -w --show-email ${sha}~1 -L ${lineIndex},${lineIndex} -- ${file}`).toString();
+        }
+
+        const email = prevBlame ? getEmail(prevBlame) : getEmail(line);
+
         if (!email || excludeUsers.includes(email) || commentIndices.includes(lineIndex)) {
           return accum;
         }
