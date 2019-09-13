@@ -38,7 +38,7 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
           const sha = line.split(' ').shift();
           let prevBlame;
 
-          if (config.exclude.shas.includes(sha)) {
+          if (config.exclude.shas && config.exclude.shas.includes(sha)) {
             // if this line has a blacklisted sha... get the previous versions change
             prevBlame = cp
               .execSync(
