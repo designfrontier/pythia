@@ -16,7 +16,10 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
 
   const checkOwnershipStub = sandbox.stub(utils, 'checkOwnership');
   const file = 'fixtures/blame.txt';
-  sandbox.stub(cp, 'exec').withArgs(`git blame -w --show-email HEAD~1 -- ${file}`).yields(undefined, blameResult, undefined);
+  sandbox
+    .stub(cp, 'exec')
+    .withArgs(`git blame -w --show-email HEAD~1 -- ${file}`)
+    .yields(undefined, blameResult, undefined);
   const excludeUsers = [];
   const publish = false;
   const currentAuthor = 'doug@example.com';
@@ -29,7 +32,7 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
       filePath: file,
       ownedLines: 3,
       size: 4,
-      threshold: config.threshold,
+      threshold: config.threshold
     });
     t.is(givenPublish, publish);
   });
@@ -40,7 +43,7 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
       filePath: file,
       ownedLines: 1,
       size: 4,
-      threshold: config.threshold,
+      threshold: config.threshold
     });
     t.is(givenPublish, publish);
     t.end();
@@ -50,12 +53,17 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
 });
 
 test.cb('calls checkOwnership without commented lines', t => {
-
-  const blameResult = fs.readFileSync('fixtures/blame-comment-single-line.txt', 'utf8');
+  const blameResult = fs.readFileSync(
+    'fixtures/blame-comment-single-line.txt',
+    'utf8'
+  );
 
   const checkOwnershipStub = sandbox.stub(utils, 'checkOwnership');
   const file = 'fixtures/code-comment-single-line.rb';
-  sandbox.stub(cp, 'exec').withArgs(`git blame -w --show-email HEAD~1 -- ${file}`).yields(undefined, blameResult, undefined);
+  sandbox
+    .stub(cp, 'exec')
+    .withArgs(`git blame -w --show-email HEAD~1 -- ${file}`)
+    .yields(undefined, blameResult, undefined);
   const excludeUsers = [];
   const publish = false;
   const currentAuthor = 'doug@example.com';
@@ -73,7 +81,7 @@ test.cb('calls checkOwnership without commented lines', t => {
       filePath: file,
       ownedLines: 1,
       size: 1,
-      threshold: config.threshold,
+      threshold: config.threshold
     });
     t.end();
   });
@@ -84,15 +92,21 @@ test.cb('calls checkOwnership without commented lines', t => {
 test.cb('calls checkOwnership with comments and multiple authors', t => {
   t.plan(2);
 
-  const blameResult = fs.readFileSync('fixtures/blame-multiple-comment.txt', 'utf8');
+  const blameResult = fs.readFileSync(
+    'fixtures/blame-multiple-comment.txt',
+    'utf8'
+  );
 
   const checkOwnershipStub = sandbox.stub(utils, 'checkOwnership');
   const file = 'fixtures/code-comment-single-line.js';
-  sandbox.stub(cp, 'exec').withArgs(`git blame -w --show-email HEAD~1 -- ${file}`).yields(undefined, blameResult, undefined);
+  sandbox
+    .stub(cp, 'exec')
+    .withArgs(`git blame -w --show-email HEAD~1 -- ${file}`)
+    .yields(undefined, blameResult, undefined);
   const excludeUsers = [];
   const publish = false;
   const currentAuthor = 'doug@example.com';
-  const config = { threshold: 42, exclude: { comments: {'.js': '//'} } };
+  const config = { threshold: 42, exclude: { comments: { '.js': '//' } } };
 
   checkOwnershipStub.onCall(0).callsFake((params, givenPublish) => {
     t.deepEqual(params, {
@@ -101,7 +115,7 @@ test.cb('calls checkOwnership with comments and multiple authors', t => {
       filePath: file,
       ownedLines: 2,
       size: 3,
-      threshold: config.threshold,
+      threshold: config.threshold
     });
   });
   checkOwnershipStub.onCall(1).callsFake((params, givenPublish) => {
@@ -111,7 +125,7 @@ test.cb('calls checkOwnership with comments and multiple authors', t => {
       filePath: file,
       ownedLines: 1,
       size: 3,
-      threshold: config.threshold,
+      threshold: config.threshold
     });
     t.end();
   });

@@ -1,67 +1,63 @@
 #!/usr/bin/env node
 
-const processFile = require('../modules/process-file'),
-      cp = require('child_process'),
-      fs = require('fs'),
-      path = require('path'),
-      readConfig = require('../modules/read-config'),
-      writeHeader = () => {
-        console.log('\n\n\n');
-        console.log(fs.readFileSync(path.join(__dirname, '../modules/header.txt'), 'utf8'));
-        console.log('\nLooking into the past to save the future...\n');
-        console.log('-------------------------------------------');
-      },
-      writeFooter = () => {
-        console.log('-------------------------------------------');
-        console.log('');
-      },
-      getConfigFileLocation = () => {
-        const indx = process.argv.indexOf('--config') + 1;
+const processFile = require('../modules/process-file');
+const cp = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const readConfig = require('../modules/read-config');
+const { writeHeader, writeFooter } = require('../modules/output');
+const getConfigFileLocation = () => {
+  const indx = process.argv.indexOf('--config') + 1;
 
-        if (indx + 1 > process.argv.length || /^--/.exec(process.argv[indx])) {
-          console.log('Please provide a file with your --config flag');
-          process.exit(1);
-        }
-
-        return process.argv.indexOf('--config') > 0 ? process.argv[indx] : undefined;
-      }
-      config = readConfig(getConfigFileLocation()),
-      publishReviewRequests = process.argv.includes('--publish') || process.argv.includes('-p')
-      isExcluded = (filePath) => {
-        const parsed = path.parse(filePath),
-              isExcludedFile = config.exclude.files.includes(filePath),
-              isExcludedDir = config.exclude.directories.length
-                ? new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir)
-                : false;
-
-        return isExcludedFile || isExcludedDir;
-      };
-
-writeHeader();
-cp.exec('git diff-tree --no-commit-id --name-only -r HEAD', (error, stdout, stderr) => {
-  if (error) {
-    console.log('Well.... something broke. Bad.');
+  if (indx + 1 > process.argv.length || /^--/.exec(process.argv[indx])) {
+    console.log('Please provide a file with your --config flag');
+    process.exit(1);
   }
 
-  cp.exec('git log --format="%ae" -n 1', (err, out) => {
-    // split on lines to get the list of files
-    stdout.split('\n').forEach((file) => {
-      const filePath = path.join(process.cwd(), file);
+  return process.argv.indexOf('--config') > 0 ? process.argv[indx] : undefined;
+};
 
-      fs.stat(filePath, (err, stat) => {
-        if (!err && stat.isFile() && !isExcluded(file)) {
-          processFile({
-            file,
-            excludeUsers: config.exclude.users,
-            publish: publishReviewRequests,
-            currentAuthor: out.replace(/\n$/, ''),
-            config
-          });
-        }
+const config = readConfig(getConfigFileLocation());
+const publishReviewRequests =
+  process.argv.includes('--publish') || process.argv.includes('-p');
+const isExcluded = filePath => {
+  const parsed = path.parse(filePath),
+    isExcludedFile = config.exclude.files.includes(filePath),
+    isExcludedDir = config.exclude.directories.length
+      ? new RegExp('^' + config.exclude.directories.join('|^')).test(parsed.dir)
+      : false;
+
+  return isExcludedFile || isExcludedDir;
+};
+
+writeHeader();
+cp.exec(
+  'git diff-tree --no-commit-id --name-only -r HEAD',
+  (error, stdout, stderr) => {
+    if (error) {
+      console.log('Well.... something broke. Bad.');
+    }
+
+    cp.exec('git log --format="%ae" -n 1', (err, out) => {
+      // split on lines to get the list of files
+      stdout.split('\n').forEach(file => {
+        const filePath = path.join(process.cwd(), file);
+
+        fs.stat(filePath, (err, stat) => {
+          if (!err && stat.isFile() && !isExcluded(file)) {
+            processFile({
+              file,
+              excludeUsers: config.exclude.users,
+              publish: publishReviewRequests,
+              currentAuthor: out.replace(/\n$/, ''),
+              config
+            });
+          }
+        });
       });
     });
-  });
-});
+  }
+);
 
 process.on('exit', () => {
   writeFooter();
