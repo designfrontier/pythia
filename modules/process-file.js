@@ -40,13 +40,16 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
 
           if (config.exclude.shas && config.exclude.shas.includes(sha)) {
             // if this line has a blacklisted sha... get the previous versions change
-            prevBlame = cp
-              .execSync(
-                `git blame -w --show-email ${sha}~1 -L ${lineIndex},${lineIndex} -- ${file}`
-              )
-              .toString();
-          }
+            do {
+              let thisSha = !!prevBlame ? prevBlame.split(' ')[0] : sha;
 
+              prevBlame = cp
+                .execSync(
+                  `git blame -w --show-email ${thisSha}~1 -L ${lineIndex},${lineIndex} -- ${file}`
+                )
+                .toString();
+            } while (config.exclude.shas.includes(prevBlame.split(' ')[0]));
+          }
           const email = prevBlame ? getEmail(prevBlame) : getEmail(line);
 
           if (
@@ -74,7 +77,7 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
               ownedLines: emails[email],
               author: email,
               filePath: file,
-              currentAuthor,
+              currentAuthor: 'bob', // currentAuthor,
               threshold: config.threshold
             },
             publish
