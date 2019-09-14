@@ -77,7 +77,7 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
               ownedLines: emails[email],
               author: email,
               filePath: file,
-              currentAuthor: 'bob', // currentAuthor,
+              currentAuthor,
               threshold: config.threshold
             },
             publish
