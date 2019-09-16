@@ -70,7 +70,6 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
         }, {});
 
         Object.keys(emails).forEach(email => {
-          // { size, ownedLines, author, file_path }
           utils.checkOwnership(
             {
               size: lines,

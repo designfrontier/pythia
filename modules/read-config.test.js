@@ -43,6 +43,16 @@ test('for a config file with excluded files', t => {
   ]);
 });
 
+test('for a config file without excluded shas', t => {
+  t.deepEqual(readConfig('fixtures/.exclude-files-config').exclude.shas, []);
+});
+
+test('for a config file with excluded shas', t => {
+  t.deepEqual(readConfig('fixtures/.exclude-shas-config').exclude.shas, [
+    'bed1a172'
+  ]);
+});
+
 test('for a config file with excluded comments', t => {
   t.deepEqual(
     readConfig('fixtures/.exclude-comments-config').exclude.comments,
