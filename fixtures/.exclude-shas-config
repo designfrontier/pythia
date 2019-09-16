@@ -1,0 +1,9 @@
+{
+  "exclude": {
+    "files": [
+      "file-one",
+      "file-two"
+    ],
+    "shas": ["bed1a172"]
+  }
+}

@@ -1,5 +1,5 @@
-const test = require('ava'),
-readConfig = require('./read-config');
+const test = require('ava');
+const readConfig = require('./read-config');
 
 test('for an empty config file', t => {
   t.deepEqual(readConfig('fixtures/.empty-config'), {
@@ -8,7 +8,8 @@ test('for an empty config file', t => {
       users: [],
       directories: [],
       files: [],
-      comments: {}
+      comments: {},
+      shas: []
     }
   });
 });
@@ -22,19 +23,41 @@ test('for a config file with threshold', t => {
 });
 
 test('for a config file with excluded users', t => {
-  t.deepEqual(readConfig('fixtures/.exclude-users-config').exclude.users, ['test1@example.com', 'test2@example.com']);
+  t.deepEqual(readConfig('fixtures/.exclude-users-config').exclude.users, [
+    'test1@example.com',
+    'test2@example.com'
+  ]);
 });
 
 test('for a config file with excluded directories', t => {
-  t.deepEqual(readConfig('fixtures/.exclude-directories-config').exclude.directories, ['dir-one', 'dir-two']);
+  t.deepEqual(
+    readConfig('fixtures/.exclude-directories-config').exclude.directories,
+    ['dir-one', 'dir-two']
+  );
 });
 
 test('for a config file with excluded files', t => {
-  t.deepEqual(readConfig('fixtures/.exclude-files-config').exclude.files, ['file-one', 'file-two']);
+  t.deepEqual(readConfig('fixtures/.exclude-files-config').exclude.files, [
+    'file-one',
+    'file-two'
+  ]);
+});
+
+test('for a config file without excluded shas', t => {
+  t.deepEqual(readConfig('fixtures/.exclude-files-config').exclude.shas, []);
+});
+
+test('for a config file with excluded shas', t => {
+  t.deepEqual(readConfig('fixtures/.exclude-shas-config').exclude.shas, [
+    'bed1a172'
+  ]);
 });
 
 test('for a config file with excluded comments', t => {
-  t.deepEqual(readConfig('fixtures/.exclude-comments-config').exclude.comments, { rb: '#', js: '//' });
+  t.deepEqual(
+    readConfig('fixtures/.exclude-comments-config').exclude.comments,
+    { rb: '#', js: '//' }
+  );
 });
 
 test('for a full featured config file', t => {
@@ -44,8 +67,8 @@ test('for a full featured config file', t => {
       users: ['test1@example.com', 'test2@example.com'],
       directories: ['dir-one', 'dir-two'],
       files: ['file-one', 'file-two'],
-      comments: { rb: '#', js: '//' }
+      comments: { rb: '#', js: '//' },
+      shas: []
     }
   });
 });
-
