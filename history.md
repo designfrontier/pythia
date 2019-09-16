@@ -1,3 +1,16 @@
+### - 0.7.0 _ 9/16/2019, 7:48:26 AM _
+
+- eslint and prettier... together again
+- Merge pull request #26 from designfrontier/feature/blacklist-sha
+- added node 8 since have known users there
+- updated deps, added tests, the sha exclude is ready to ship
+- fixed issue with the currentAuthor added for testing
+- now covers the case where multiple shas in a row are blacklisted
+- fixes broken test with a better check
+- Adds prettier for better code formatting
+- Adds travis.yml file
+- Adds sha blacklisting
+
 ### - 0.6.0 _ 8/1/2019, 8:22:17 PM _
 
 ### - 0.5.9 _ 8/1/2019, 8:22:06 PM _
