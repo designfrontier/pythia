@@ -7,8 +7,14 @@
     "pythia": "./bin/pythia"
   },
   "scripts": {
+    "eslint": "eslint .",
+    "pretest": "eslint .",
+    "prettier": "prettier modules/**/*.js bin/pythia",
+    "prettier:write": "prettier --write modules/**/*.js bin/pythia",
     "test": "ava modules/*.test.js --serial",
-    "release": "npm test && tom"
+    "release": "npm test && echo ' => releasing' && tom",
+    "release:minor": "npm test && echo ' => releasing' && tom --type=minor",
+    "release:major": "npm test && echo ' => releasing' && tom --type=major"
   },
   "repository": {
     "type": "git",
@@ -31,9 +37,22 @@
   },
   "devDependencies": {
     "ava": "^2.2.0",
+    "eslint": "6.3.0",
+    "eslint-config-prettier": "6.2.0",
+    "eslint-config-semistandard": "15.0.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-flowtype": "4.3.0",
+    "eslint-plugin-format-message": "6.2.3",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jest": "22.17.0",
+    "eslint-plugin-node": "10.0.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1",
     "husky": "^3.0.5",
     "prettier": "1.18.2",
     "pretty-quick": "^1.11.1",
+    "semistandard-prettier-eslint": "1.0.2",
     "sinon": "^7.3.2",
     "tom-sawyer": "^0.1.7"
   },

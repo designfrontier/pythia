@@ -153,7 +153,7 @@ test.cb('calls git blame again if the shas is excluded', t => {
     exclude: { comments: {}, shas: ['8a83ec04'] }
   };
 
-  const ecstub = sandbox
+  sandbox
     .stub(cp, 'execSync')
     .returns(
       Buffer.from(

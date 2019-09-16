@@ -25,6 +25,7 @@ const getFileLength = (file, config, cb) => {
       currentLine++;
     })
     .on('end', () => {
+      // eslint-disable-next-line standard/no-callback-literal
       cb(currentLine - commentIndices.length, commentIndices);
     });
 };
@@ -34,6 +35,10 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
     cp.exec(
       `git blame -w --show-email HEAD~1 -- ${file}`,
       (error, stdout, stderr) => {
+        if (error) {
+          throw error;
+        }
+
         const emails = stdout.split('\n').reduce((accum, line, lineIndex) => {
           const sha = line.split(' ').shift();
           let prevBlame;
@@ -41,7 +46,7 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
           if (config.exclude.shas && config.exclude.shas.includes(sha)) {
             // if this line has a blacklisted sha... get the previous versions change
             do {
-              let thisSha = !!prevBlame ? prevBlame.split(' ')[0] : sha;
+              const thisSha = prevBlame ? prevBlame.split(' ')[0] : sha;
 
               prevBlame = cp
                 .execSync(

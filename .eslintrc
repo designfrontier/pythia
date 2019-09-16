@@ -1,0 +1,17 @@
+{
+  "env": {
+    "jest/globals": true
+  },
+  "extends": [
+    "semistandard",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended",
+    "prettier/standard"
+  ],
+  "plugins": ["jest"],
+  "rules": {
+    "no-console": "error"
+  },
+  "settings": {
+  }
+}

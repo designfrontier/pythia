@@ -22,15 +22,18 @@ module.exports.checkOwnership = (details, publish) => {
         [author, ownership.toFixed(2), filePath],
         (err, out) => {
           if (err) {
+            // eslint-disable-next-line no-console
             console.log(err);
           }
 
           if (out !== '' && out !== '\n' && out !== ' ') {
+            // eslint-disable-next-line no-console
             console.log(out.replace(/\n$/, ''));
           }
         }
       );
     }
+    // eslint-disable-next-line no-console
     console.log(
       `${author} owns: ${ownership.toFixed(2)} percent of ${filePath}`
     );

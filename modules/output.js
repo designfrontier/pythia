@@ -2,16 +2,23 @@ const fs = require('fs');
 const path = require('path');
 
 const writeHeader = () => {
-  console.log('\n\n\n');
-  console.log(
-    fs.readFileSync(path.join(__dirname, '../modules/header.txt'), 'utf8')
-  );
-  console.log('\nLooking into the past to save the future...\n');
-  console.log('-------------------------------------------');
+  // eslint-disable-next-line no-console
+  console.log(`
+
+
+
+${fs.readFileSync(path.join(__dirname, '../modules/header.txt'), 'utf8')}
+
+Looking into the past to save the future...
+
+-------------------------------------------
+  `);
 };
 const writeFooter = () => {
-  console.log('-------------------------------------------');
-  console.log('');
+  // eslint-disable-next-line no-console
+  console.log(`-------------------------------------------
+
+  `);
 };
 
 module.exports = {
