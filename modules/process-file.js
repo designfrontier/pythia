@@ -34,11 +34,7 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
   getFileLength(file, config, (lines, commentIndices) => {
     cp.exec(
       `git blame -w --show-email HEAD~1 -- ${file}`,
-      (error, stdout, stderr) => {
-        if (error) {
-          throw error;
-        }
-
+      (_, stdout, stderr) => {
         const emails = stdout.split('\n').reduce((accum, line, lineIndex) => {
           const sha = line.split(' ').shift();
           let prevBlame;
