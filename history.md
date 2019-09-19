@@ -1,3 +1,24 @@
+### - 0.7.1 _ 9/19/2019, 10:38:02 AM _
+
+- Merge pull request #29 from designfrontier/feature/fix-black-listing
+- Merge pull request #28 from designfrontier/greenkeeper/eslint-plugin-prettier-3.1.1
+- adds a node-version
+- Shouldn't throw on missing file/new file
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint-plugin-prettier to version 3.1.1
+- 0.7.0
+- preparing for release of v0.7.0
+- eslint and prettier... together again
+- Merge pull request #26 from designfrontier/feature/blacklist-sha
+- added node 8 since have known users there
+- updated deps, added tests, the sha exclude is ready to ship
+- fixed issue with the currentAuthor added for testing
+- now covers the case where multiple shas in a row are blacklisted
+- fixes broken test with a better check
+- Adds prettier for better code formatting
+- Adds travis.yml file
+- Adds sha blacklisting
+
 ### - 0.7.0 _ 9/16/2019, 7:48:26 AM _
 
 - eslint and prettier... together again
