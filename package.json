@@ -54,7 +54,7 @@
     "pretty-quick": "^1.11.1",
     "semistandard-prettier-eslint": "1.0.2",
     "sinon": "^7.4.2",
-    "tom-sawyer": "^0.1.7"
+    "tom-sawyer": "^0.3.0"
   },
   "husky": {
     "hooks": {
