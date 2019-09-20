@@ -1,3 +1,16 @@
+### - 0.7.2 _ 9/19/2019, 10:33:28 PM _
+
+- Merge pull request #30 from designfrontier/feature/github-example
+- Adds an example that should work for github
+- 0.7.1
+- preparing for release of v0.7.1
+- Merge pull request #29 from designfrontier/feature/fix-black-listing
+- Merge pull request #28 from designfrontier/greenkeeper/eslint-plugin-prettier-3.1.1
+- adds a node-version
+- Shouldn't throw on missing file/new file
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint-plugin-prettier to version 3.1.1
+
 ### - 0.7.1 _ 9/19/2019, 10:38:02 AM _
 
 - Merge pull request #29 from designfrontier/feature/fix-black-listing
