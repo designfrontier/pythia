@@ -2,15 +2,17 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/designfrontier/pythia.svg)](https://greenkeeper.io/)
 
-*formerly known as foresight*
+_formerly known as foresight_
 
 Outputs the emails for each person with >20% ownership of any file in your commit. Involving these owners in communication about changes to files they own has been shown to reduce the number of bugs in research done by microsoft.
 
 For further reading see:
+
 - https://www.microsoft.com/en-us/research/publication/the-influence-of-organizational-structure-on-software-quality-an-empirical-case-study/
 - https://www.microsoft.com/en-us/research/publication/dont-touch-my-code-examining-the-effects-of-ownership-on-software-quality/
 
 ## usage
+
 `npm i -g pythia`
 
 Then you will have `pythia` as a command that you can run from your console!
@@ -23,7 +25,31 @@ passing it the email of the author, ownership percentage, and location of the fi
 You can write a `.pythia-publish` file to do whatever you need it to do for your
 review system.
 
-As an example, for gerrit you might do something like this:
+Three arguments are passed in a call that looks like:
+
+```
+./.pythia-publish daniel@some-website.com 93.25 somefile-path.md
+```
+
+So in bash that means
+
+```
+$1 = author's email
+$2 = percentage of ownership
+$3 = the file that is owned
+```
+
+Just to reiterate: `.pythia-publish` will be called once per author and the first
+argument to it will be the author's email.
+
+Also: the `.pythia-publish` file needs to be executable (`chmod +x .pythia-publish`)
+and located in the root of your project (which is where you should call pythia from).
+
+### Publish File Examples
+
+#### Gerrit
+
+For gerrit you might do something like this:
 
 ```
 #! /bin/sh
@@ -31,23 +57,22 @@ As an example, for gerrit you might do something like this:
 ssh -p 29418 user@gerrit.bob.com gerrit set-reviewers -p my-project my-change-id-here -a $1
 ```
 
-The three arguments are passed in a call that looks like:
+#### Github
+
+For github you might do something like this:
+
 ```
-./.pythia-publish daniel@some-website.com 93.25 somefile-path.md
+#! /bin/sh
+
+TEAM=(["daniel@some-website.com"]="designfrontier" ["githubuser@gmail.com"]="githubusername")
+
+curl "https://api.github.com/repos/$REPO_OWNER/$PROJECT_NAME/pulls/$PULL_REQUEST_NUMBER/requested_reviewers?access_token=$GITHUB_TOKEN" -H "Content-Type: application/json" -X POST -d "{\"reviewers\":[\"${TEAM[$1]}\"]}"
 ```
 
-So in bash that means
-```
-$1 = author's email
-$2 = percentage of ownership
-$3 = the file that is owned
-```
-
-Just to reiterate: `.pythia-publish` will be called once per author and the last
-argument to it will be the author's email.
-
-Also: the `.pythia-publish` file needs to be executable (`chmod +x .pythia-publish`)
-and located in the root of your project (which is where you should call pythia from).
+For github to work all of the variables there will need to be set in the env
+in a way that lets the `.pithia.publish` call access them. If you set them in
+your call to `pythia` they should be passed through to the call to the publish
+script.
 
 ## config file
 
