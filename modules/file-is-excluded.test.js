@@ -1,3 +1,5 @@
+/* eslint-disable jest/expect-expect, jest/no-test-callback */
+
 const test = require('ava');
 const fileIsExcluded = require('./file-is-excluded');
 
