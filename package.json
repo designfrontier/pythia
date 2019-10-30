@@ -1,6 +1,6 @@
 {
   "name": "pythia",
-  "version": "0.7.2",
+  "version": "1.0.0",
   "description": "Outputs the emails for each person with >20% ownership of any file in your commit.",
   "main": "./bin/pythia",
   "bin": {
