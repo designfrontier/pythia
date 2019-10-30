@@ -1,3 +1,29 @@
+### - 1.0.0 _ 10/29/2019, 9:01:58 PM _
+
+- Merge pull request #33 from designfrontier/greenkeeper/tom-sawyer-0.3.0
+- update lock file
+- Merge branch 'master' into greenkeeper/tom-sawyer-0.3.0
+- Merge pull request #39 from designfrontier/greenkeeper/eslint-plugin-jest-23.0.2
+- cleans up lints
+- removes support for node 8
+- updates the lock file
+- Merge branch 'master' into greenkeeper/eslint-plugin-jest-23.0.2
+- Merge pull request #40 from designfrontier/greenkeeper/eslint-6.6.0
+- Merge branch 'master' into greenkeeper/eslint-6.6.0
+- Merge pull request #38 from designfrontier/greenkeeper/eslint-config-prettier-6.5.0
+- Merge pull request #37 from designfrontier/greenkeeper/pretty-quick-2.0.0
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint-plugin-jest to version 23.0.2
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint-config-prettier to version 6.5.0
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint to version 6.6.0
+- chore(package): update lockfile package-lock.json
+- chore(package): update pretty-quick to version 2.0.0
+- chore(package): update lockfile package-lock.json
+- chore(package): update tom-sawyer to version 0.3.0
+- dependency version updates
+
 ### - 0.7.2 _ 9/19/2019, 10:33:28 PM _
 
 - Merge pull request #30 from designfrontier/feature/github-example
