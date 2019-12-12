@@ -1,3 +1,27 @@
+### - 1.0.1 _ 12/12/2019, 3:52:23 PM _
+
+- Merge pull request #50 from designfrontier/greenkeeper/eslint-plugin-flowtype-4.5.2
+- update lock
+- Merge branch 'master' into greenkeeper/eslint-plugin-flowtype-4.5.2
+- Merge pull request #52 from designfrontier/greenkeeper/eslint-plugin-jest-23.1.1
+- Merge pull request #48 from designfrontier/greenkeeper/eslint-6.7.2
+- Merge pull request #51 from designfrontier/greenkeeper/prettier-1.19.1
+- Merge branch 'master' into greenkeeper/eslint-plugin-jest-23.1.1
+- Merge branch 'master' into greenkeeper/eslint-6.7.2
+- Merge pull request #49 from designfrontier/greenkeeper/eslint-config-prettier-6.7.0
+- Merge pull request #47 from designfrontier/greenkeeper/eslint-plugin-import-2.19.0
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint-plugin-import to version 2.19.0
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint-plugin-jest to version 23.1.1
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint to version 6.7.2
+- chore(package): update eslint-plugin-flowtype to version 4.5.2
+- chore(package): update lockfile package-lock.json
+- chore(package): update eslint-config-prettier to version 6.7.0
+- chore(package): update lockfile package-lock.json
+- chore(package): update prettier to version 1.19.1
+
 ### - 1.0.0 _ 10/29/2019, 9:01:58 PM _
 
 - Merge pull request #33 from designfrontier/greenkeeper/tom-sawyer-0.3.0
