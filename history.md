@@ -1,3 +1,7 @@
+### - 1.0.2 _ 12/12/2019, 10:14:01 PM _
+
+- update all deps
+
 ### - 1.0.1 _ 12/12/2019, 3:52:23 PM _
 
 - Merge pull request #50 from designfrontier/greenkeeper/eslint-plugin-flowtype-4.5.2
