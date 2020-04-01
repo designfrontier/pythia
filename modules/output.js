@@ -23,5 +23,5 @@ const writeFooter = () => {
 
 module.exports = {
   writeFooter,
-  writeHeader
+  writeHeader,
 };

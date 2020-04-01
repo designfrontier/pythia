@@ -20,7 +20,7 @@ const getConfigFileLocation = () => {
 const config = readConfig(getConfigFileLocation());
 const publishReviewRequests =
   process.argv.includes('--publish') || process.argv.includes('-p');
-const isExcluded = filePath => {
+const isExcluded = (filePath) => {
   const parsed = path.parse(filePath),
     isExcludedFile = config.exclude.files.includes(filePath),
     isExcludedDir = config.exclude.directories.length
@@ -40,7 +40,7 @@ cp.exec(
 
     cp.exec('git log --format="%ae" -n 1', (err, out) => {
       // split on lines to get the list of files
-      stdout.split('\n').forEach(file => {
+      stdout.split('\n').forEach((file) => {
         const filePath = path.join(process.cwd(), file);
 
         fs.stat(filePath, (err, stat) => {
@@ -50,7 +50,7 @@ cp.exec(
               excludeUsers: config.exclude.users,
               publish: publishReviewRequests,
               currentAuthor: out.replace(/\n$/, ''),
-              config
+              config,
             });
           }
         });

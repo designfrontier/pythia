@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const readFile = filePath => JSON.parse(fs.readFileSync(filePath, 'utf8'));
+const readFile = (filePath) => JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
 module.exports = (location = '.pythia-config') => {
   const filePath = path.join(process.cwd(), location);
@@ -8,14 +8,14 @@ module.exports = (location = '.pythia-config') => {
   const exclude = configFile.exclude ? readFile(filePath).exclude : {};
   const threshold = configFile.threshold || 20;
 
-  ['users', 'directories', 'files', 'shas'].forEach(item => {
+  ['users', 'directories', 'files', 'shas'].forEach((item) => {
     if (typeof exclude[item] === 'undefined') {
       exclude[item] = [];
     }
   });
 
   // convert all shas to short version
-  exclude.shas = exclude.shas.map(i => i.substring(0, 8));
+  exclude.shas = exclude.shas.map((i) => i.substring(0, 8));
 
   if (typeof exclude.comments === 'undefined') {
     exclude.comments = {};
@@ -23,6 +23,6 @@ module.exports = (location = '.pythia-config') => {
 
   return {
     exclude,
-    threshold
+    threshold,
   };
 };

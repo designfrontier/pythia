@@ -7,9 +7,9 @@ const utils = require('./check-ownership');
 
 const sandbox = sinon.createSandbox();
 
-test.beforeEach(t => sandbox.restore());
+test.beforeEach((t) => sandbox.restore());
 
-test.cb('calls checkOwnership with the appropriate arguments', t => {
+test.cb('calls checkOwnership with the appropriate arguments', (t) => {
   t.plan(4);
 
   const blameResult = fs.readFileSync('fixtures/blame.txt', 'utf8');
@@ -32,7 +32,7 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
       filePath: file,
       ownedLines: 3,
       size: 4,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
     t.is(givenPublish, publish);
   });
@@ -43,7 +43,7 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
       filePath: file,
       ownedLines: 1,
       size: 4,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
     t.is(givenPublish, publish);
     t.end();
@@ -52,7 +52,7 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
   processFile({ file, excludeUsers, publish, currentAuthor, config });
 });
 
-test.cb('calls checkOwnership without commented lines', t => {
+test.cb('calls checkOwnership without commented lines', (t) => {
   const blameResult = fs.readFileSync(
     'fixtures/blame-comment-single-line.txt',
     'utf8'
@@ -70,8 +70,8 @@ test.cb('calls checkOwnership without commented lines', t => {
   const config = {
     threshold: 42,
     exclude: {
-      comments: { '.rb': '#' }
-    }
+      comments: { '.rb': '#' },
+    },
   };
 
   checkOwnershipStub.onCall(0).callsFake((params, givenPublish) => {
@@ -81,7 +81,7 @@ test.cb('calls checkOwnership without commented lines', t => {
       filePath: file,
       ownedLines: 1,
       size: 1,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
     t.end();
   });
@@ -89,7 +89,7 @@ test.cb('calls checkOwnership without commented lines', t => {
   processFile({ file, excludeUsers, publish, currentAuthor, config });
 });
 
-test.cb('calls checkOwnership with comments and multiple authors', t => {
+test.cb('calls checkOwnership with comments and multiple authors', (t) => {
   t.plan(2);
 
   const blameResult = fs.readFileSync(
@@ -115,7 +115,7 @@ test.cb('calls checkOwnership with comments and multiple authors', t => {
       filePath: file,
       ownedLines: 2,
       size: 3,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
   });
   checkOwnershipStub.onCall(1).callsFake((params, givenPublish) => {
@@ -125,7 +125,7 @@ test.cb('calls checkOwnership with comments and multiple authors', t => {
       filePath: file,
       ownedLines: 1,
       size: 3,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
     t.end();
   });
@@ -133,7 +133,7 @@ test.cb('calls checkOwnership with comments and multiple authors', t => {
   processFile({ file, excludeUsers, publish, currentAuthor, config });
 });
 
-test.cb('calls git blame again if the shas is excluded', t => {
+test.cb('calls git blame again if the shas is excluded', (t) => {
   t.plan(2);
 
   const blameResult = fs.readFileSync('fixtures/blame.txt', 'utf8');
@@ -150,7 +150,7 @@ test.cb('calls git blame again if the shas is excluded', t => {
   const currentAuthor = 'doug@example.com';
   const config = {
     threshold: 42,
-    exclude: { comments: {}, shas: ['8a83ec04'] }
+    exclude: { comments: {}, shas: ['8a83ec04'] },
   };
 
   sandbox
@@ -168,7 +168,7 @@ test.cb('calls git blame again if the shas is excluded', t => {
       filePath: file,
       ownedLines: 4,
       size: 4,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
     t.is(givenPublish, publish);
     t.end();

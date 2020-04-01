@@ -8,7 +8,7 @@ module.exports.checkOwnership = (details, publish) => {
     author,
     filePath,
     currentAuthor,
-    threshold
+    threshold,
   } = details;
   const ownership =
     (ownedLines / size) * 100 > 100

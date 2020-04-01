@@ -18,7 +18,7 @@ const getFileLength = (file, config, cb) => {
 
   fs.createReadStream(file)
     .pipe(split(null, null, { trailing: false }))
-    .on('data', chunk => {
+    .on('data', (chunk) => {
       if (isCommentLine(chunk, commentChar)) {
         commentIndices.push(currentLine);
       }
@@ -70,7 +70,7 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
           return accum;
         }, {});
 
-        Object.keys(emails).forEach(email => {
+        Object.keys(emails).forEach((email) => {
           utils.checkOwnership(
             {
               size: lines,
@@ -78,7 +78,7 @@ module.exports = ({ file, excludeUsers, publish, currentAuthor, config }) => {
               author: email,
               filePath: file,
               currentAuthor,
-              threshold: config.threshold
+              threshold: config.threshold,
             },
             publish
           );
