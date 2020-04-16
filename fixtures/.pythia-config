@@ -1,5 +1,6 @@
 {
   "threshold": 43,
+  "owners": "./owners.json",
   "exclude": {
     "users": [
       "test1@example.com",

@@ -18,6 +18,7 @@ const getConfigFileLocation = () => {
 };
 
 const config = readConfig(getConfigFileLocation());
+console.log(config);
 const publishReviewRequests =
   process.argv.includes('--publish') || process.argv.includes('-p');
 const isExcluded = (filePath) => {

@@ -6,6 +6,9 @@ module.exports = (location = '.pythia-config') => {
   const filePath = path.join(process.cwd(), location);
   const configFile = fs.existsSync(filePath) ? readFile(filePath) : {};
   const exclude = configFile.exclude ? readFile(filePath).exclude : {};
+  const institutionalOwners = configFile.owners
+    ? readFile(configFile.owners)
+    : {};
   const threshold = configFile.threshold || 20;
 
   ['users', 'directories', 'files', 'shas'].forEach((item) => {
@@ -24,5 +27,6 @@ module.exports = (location = '.pythia-config') => {
   return {
     exclude,
     threshold,
+    institutionalOwners,
   };
 };
