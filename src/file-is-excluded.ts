@@ -1,7 +1,8 @@
-const path = require('path');
+import { parse } from 'path';
+import type { Config } from './read-config';
 
-module.exports = (filePath, config) => {
-  const parsed = path.parse(filePath);
+export const fileIsExcluded = (filePath: string, config: Config) => {
+  const parsed = parse(filePath);
   const isExcludedFile =
     config.exclude.files && config.exclude.files.includes(filePath);
   const isExcludedDir =

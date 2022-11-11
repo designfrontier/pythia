@@ -1,0 +1,24 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": ["@swc/jest"]
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "collectCoverageFrom": [
+    "src/**/*.{ts,tsx}",
+    "!src/types.ts",
+    "!src/test-helpers/**/*.{ts,tsx}",
+    "!src/types.ts"
+  ],
+  "collectCoverage": true,
+  "coverageReporters": ["text", "html", "json-summary"],
+  "coverageDirectory": "coverage-report",
+  "coverageThreshold": {
+    "global": {
+      "branches": 69.23,
+      "functions": 83.33,
+      "lines": 82.35,
+      "statements": 82.69
+    }
+  }
+}

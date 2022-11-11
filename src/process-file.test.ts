@@ -1,16 +1,15 @@
-const test = require('ava');
-const sinon = require('sinon');
-const processFile = require('./process-file');
-const fs = require('fs');
-const cp = require('child_process');
-const utils = require('./check-ownership');
+import * as sinon from 'sinon';
+import { processFile } from './process-file';
+import * as fs from 'fs';
+import * as cp from 'child_process';
+import * as utils from './check-ownership';
 
 const sandbox = sinon.createSandbox();
 
-test.beforeEach(t => sandbox.restore());
+beforeEach(() => sandbox.restore());
 
-test.cb('calls checkOwnership with the appropriate arguments', t => {
-  t.plan(4);
+test('calls checkOwnership with the appropriate arguments', (done) => {
+  expect.assertions(4);
 
   const blameResult = fs.readFileSync('fixtures/blame.txt', 'utf8');
 
@@ -26,33 +25,33 @@ test.cb('calls checkOwnership with the appropriate arguments', t => {
   const config = { threshold: 42, exclude: { comments: {} } };
 
   checkOwnershipStub.onCall(0).callsFake((params, givenPublish) => {
-    t.deepEqual(params, {
+    expect(params).toEqual({
       author: 'alice@example.com',
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 3,
       size: 4,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
-    t.is(givenPublish, publish);
+    expect(givenPublish).toBe(publish);
   });
   checkOwnershipStub.onCall(1).callsFake((params, givenPublish) => {
-    t.deepEqual(params, {
+    expect(params).toEqual({
       author: 'bob@example.com',
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 1,
       size: 4,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
-    t.is(givenPublish, publish);
-    t.end();
+    expect(givenPublish).toBe(publish);
+    done();
   });
 
   processFile({ file, excludeUsers, publish, currentAuthor, config });
 });
 
-test.cb('calls checkOwnership without commented lines', t => {
+test('calls checkOwnership without commented lines', (done) => {
   const blameResult = fs.readFileSync(
     'fixtures/blame-comment-single-line.txt',
     'utf8'
@@ -70,27 +69,27 @@ test.cb('calls checkOwnership without commented lines', t => {
   const config = {
     threshold: 42,
     exclude: {
-      comments: { '.rb': '#' }
-    }
+      comments: { '.rb': '#' },
+    },
   };
 
   checkOwnershipStub.onCall(0).callsFake((params, givenPublish) => {
-    t.deepEqual(params, {
+    expect(params).toEqual({
       author: 'alice@example.com',
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 1,
       size: 1,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
-    t.end();
+    done();
   });
 
   processFile({ file, excludeUsers, publish, currentAuthor, config });
 });
 
-test.cb('calls checkOwnership with comments and multiple authors', t => {
-  t.plan(2);
+test('calls checkOwnership with comments and multiple authors', (done) => {
+  expect.assertions(2);
 
   const blameResult = fs.readFileSync(
     'fixtures/blame-multiple-comment.txt',
@@ -109,32 +108,32 @@ test.cb('calls checkOwnership with comments and multiple authors', t => {
   const config = { threshold: 42, exclude: { comments: { '.js': '//' } } };
 
   checkOwnershipStub.onCall(0).callsFake((params, givenPublish) => {
-    t.deepEqual(params, {
+    expect(params).toEqual({
       author: 'alice@example.com',
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 2,
       size: 3,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
   });
   checkOwnershipStub.onCall(1).callsFake((params, givenPublish) => {
-    t.deepEqual(params, {
+    expect(params).toEqual({
       author: 'bob@example.com',
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 1,
       size: 3,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
-    t.end();
+    done();
   });
 
   processFile({ file, excludeUsers, publish, currentAuthor, config });
 });
 
-test.cb('calls git blame again if the shas is excluded', t => {
-  t.plan(2);
+test('calls git blame again if the shas is excluded', (done) => {
+  expect.assertions(2);
 
   const blameResult = fs.readFileSync('fixtures/blame.txt', 'utf8');
 
@@ -150,7 +149,7 @@ test.cb('calls git blame again if the shas is excluded', t => {
   const currentAuthor = 'doug@example.com';
   const config = {
     threshold: 42,
-    exclude: { comments: {}, shas: ['8a83ec04'] }
+    exclude: { comments: {}, shas: ['8a83ec04'] },
   };
 
   sandbox
@@ -162,16 +161,16 @@ test.cb('calls git blame again if the shas is excluded', t => {
     );
 
   checkOwnershipStub.onCall(0).callsFake((params, givenPublish) => {
-    t.deepEqual(params, {
+    expect(params).toEqual({
       author: 'alice@example.com',
       currentAuthor: currentAuthor,
       filePath: file,
       ownedLines: 4,
       size: 4,
-      threshold: config.threshold
+      threshold: config.threshold,
     });
-    t.is(givenPublish, publish);
-    t.end();
+    expect(givenPublish).toBe(publish);
+    done();
   });
 
   processFile({ file, excludeUsers, publish, currentAuthor, config });
